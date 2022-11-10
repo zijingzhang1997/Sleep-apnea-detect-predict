@@ -1,0 +1,59 @@
+SavePath='C:\Users\zz587-admin\Documents\sleep center\CNN_algorithm\Output';
+FolderName='Feat_detect_v1_repeat';
+%FolderName='Feat_pred_v4';
+opt='pred';
+opt='dect';
+creatFolder1=[SavePath,'\',FolderName];
+
+creatFolder2=[SavePath,'\',FolderName,'\','featureAll'];
+creatFolder3=[SavePath,'\',FolderName,'\','segments'];
+creatFolder4=[SavePath,'\',FolderName,'\','fig'];
+creatFolder5=[SavePath,'\',FolderName,'\','fig','\','timeStamp'];
+creatFolder6=[SavePath,'\',FolderName,'\','figPython'];
+
+
+status = mkdir(creatFolder1);
+status = mkdir(creatFolder2);
+status = mkdir(creatFolder3);
+status = mkdir(creatFolder4);
+status = mkdir(creatFolder5);
+status = mkdir(creatFolder6);
+
+fileID = fopen([SavePath,'\',FolderName,'\note.txt'],'w');
+
+
+% for prediction
+if opt=='pred'
+note="twin = 40 sec,twinMove=15 sec, predOpt=2 predict epoch in 1-2 epochs Apnea epoch excluded. only use normal epoch"...
+    + "\n feat Select opt21.pself=[60,5,0.2,80,0.3] " ...
+    +" \n features (16+13+8+4)"...
+    +" \n Add High frequency features [1 2;2 5; 5 8;8 12.5]"...
+    +" \n add smooth filt sgolayfilt(4,61); filter band [0.05,2]"...
+    +" \n \n  featComp: not compare with PSG, only use NCS self "...
+%      +  "\n opt21.pself=[60,5,0.3,70,0.35]"...
+%     +  " \n opt22.pself=70;opt23.pself=70"...
+%     +  "\n opt23.psdDiff=25; opt22.psdDiff=25"...
+%     +  "\n opt23.p=[25,8,2,1,2,1.5,10];opt22.p=[25,8,2,1,2,1.5,10]";
+
+end
+% fprintf(fileID,note);
+%for detection
+if opt=='dect'
+note="twin = 80 sec,twinMove=30 sec, detect epoches as it is now"...
+    + "\n feat compare opt21.pself=[60,6,0.22,70,0.35];  " ...
+    +" \n features (16+13+8+4)"...
+    +" \n Add High frequency features "...
+    +" \n add smooth filt sgolayfilt(4,61); filter band [0.05,2]"...
+     +" \n \n  featComp: not compare with PSG, only use NCS self " ...
+     +  "\n opt21.pself=[60,6,0.22,70,0.35]"...
+    +  " \n opt22.pself=70;opt23.pself=70"...
+    +  "\n opt23.psdDiff=25; opt22.psdDiff=25"...
+    +  "\n opt23.p=[25,8,2,1,2,1.5,10];opt22.p=[25,8,2,1,2,1.5,10]";
+  
+  
+   
+   
+end
+fprintf(fileID,note);
+
+fclose(fileID);
